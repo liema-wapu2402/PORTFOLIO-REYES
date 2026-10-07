@@ -1,30 +1,25 @@
-import React from 'react';
+import React from "react";
 
-import reactLogo from '@/assets/logos/react.png';
-import nextjsLogo from '@/assets/logos/Next.png';
-import javascriptLogo from '@/assets/logos/JS.png';
-import typescriptLogo from '@/assets/logos/TS.png';
-import nodeLogo from '@/assets/logos/node.png';
-import gitLogo from '@/assets/logos/Git.png';
-import phpLogo from '@/assets/logos/php.png';
-import mysqlLogo from '@/assets/logos/MySQL.png';
-import bootsraplogo from '@/assets/logos/bootstrao.png';
-import csslogo from '@/assets/logos/css.png';
-import djangologo from '@/assets/logos/django.png';
-import figmalogo from '@/assets/logos/figma.png';
-import htmllogo from '@/assets/logos/html.png';
-import mongologo from '@/assets/logos/mongo.png';
-import postgrelogo from '@/assets/logos/postgreSQL.png';
-import postmanlogo from '@/assets/logos/postman.png';
-
+import reactLogo from "@/assets/logos/react.png";
+import nextjsLogo from "@/assets/logos/Next.png";
+import javascriptLogo from "@/assets/logos/JS.png";
+import typescriptLogo from "@/assets/logos/TS.png";
+import nodeLogo from "@/assets/logos/node.png";
+import gitLogo from "@/assets/logos/Git.png";
+import phpLogo from "@/assets/logos/php.png";
+import mysqlLogo from "@/assets/logos/MySQL.png";
+import bootsraplogo from "@/assets/logos/bootstrao.png";
+import csslogo from "@/assets/logos/css.png";
+import djangologo from "@/assets/logos/django.png";
+import figmalogo from "@/assets/logos/figma.png";
+import htmllogo from "@/assets/logos/html.png";
+import mongologo from "@/assets/logos/mongo.png";
+import postgrelogo from "@/assets/logos/postgreSQL.png";
+import postmanlogo from "@/assets/logos/postman.png";
 
 // A generic wrapper for all logos
 const Logo = ({ src, alt }) => (
-  <img
-    src={src}
-    alt={alt}
-    className="w-full h-full object-contain"
-  />
+  <img src={src} alt={alt} className="w-full h-full object-contain" />
 );
 
 export const ReactLogo = () => <Logo src={reactLogo} alt="React" />;
