@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Amiel Andrei C. Reyes" />
+    <meta
+      name="description"
+      content="Portfolio of Amiel Andrei C. Reyes (AACR), a full-stack developer building web and desktop applications."
+    />
+    <!-- Lets mobile browsers tint the address bar to match the page. -->
+    <meta name="theme-color" content="#f6f8f9" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#14171a" media="(prefers-color-scheme: dark)" />
+    <title>Amiel Andrei C. Reyes | Full-Stack Developer</title>
+
+    <!--
+      Fonts (loaded from Google Fonts):
+        - Bricolage Grotesque -> headings  (Tailwind class: font-display)
+        - IBM Plex Sans       -> body copy (Tailwind class: font-sans, the default)
+      The family names are registered in src/index.css under @theme.
+      `display=swap` shows fallback text immediately instead of a blank flash.
+    -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..700&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!--
+      THEME BOOTSTRAP (runs before the page paints, so there is no white flash in dark mode).
+      Order of priority:
+        1. the visitor's saved choice from the toggle button (localStorage)
+        2. otherwise the visitor's operating-system setting (prefers-color-scheme)
+      It only adds/removes the `dark` class on <html>. Tailwind's `dark:` variant and the
+      CSS variables in src/index.css react to that class.
+      The storage key must match STORAGE_KEY in src/components/theme/ThemeProvider.jsx.
+    -->
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem('aacr-theme');
+          var dark = saved
+            ? saved === 'dark'
+            : window.matchMedia('(prefers-color-scheme: dark)').matches;
+          document.documentElement.classList.toggle('dark', dark);
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

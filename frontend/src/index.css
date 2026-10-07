@@ -1,0 +1,419 @@
+/* =====================================================================
+   index.css  |  Global styles and the design system for the portfolio
+   Author: Amiel Andrei C. Reyes (AACR)
+
+   HOW THIS FILE IS ORGANISED
+     1. Imports and the dark-mode switch
+     2. @theme            -> fonts, the arctic colour scale, animations
+     3. Colour tokens     -> :root (light) and .dark (dark) CSS variables
+     4. @theme inline     -> exposes the tokens as Tailwind utilities
+     5. Base layer        -> element defaults, focus ring, reduced motion
+     6. Components layer  -> reusable classes (.surface, .glass, .btn ...)
+
+   THE ONE IDEA TO REMEMBER
+     Components never hard-code "white" or "black". They use semantic
+     utilities such as bg-background, text-foreground, border-border and
+     from-surface-from. Those utilities read CSS variables, and the
+     variables change when <html> gets the `dark` class. So flipping the
+     theme re-colours the whole site without touching any component.
+   ===================================================================== */
+
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* ---------------------------------------------------------------------
+   1. DARK MODE SWITCH
+   By default Tailwind v4 switches `dark:` utilities using the visitor's
+   OS setting. This line changes that: `dark:` utilities apply whenever an
+   ancestor has the class `.dark`. ThemeProvider adds/removes that class
+   on <html>, which is what the toggle button controls.
+   Example: `bg-white dark:bg-black` is white normally, black inside .dark.
+   --------------------------------------------------------------------- */
+@custom-variant dark (&:is(.dark *));
+
+/* ---------------------------------------------------------------------
+   2. THEME: values Tailwind turns into utilities
+   `@theme static` always emits every variable, even if unused, so the
+   scale is available as bg-arctic-100, text-arctic-600, from-arctic-200...
+   --------------------------------------------------------------------- */
+@theme static {
+  /* Fonts. `font-sans` is the default body font, `font-display` is for headings. */
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Bricolage Grotesque", "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+
+  /* Arctic gray scale. oklch(lightness chroma hue):
+       - lightness 0 -> 1 goes black -> white
+       - chroma ~0.01 is almost gray, just enough tint to feel "icy"
+       - hue 235-255 is a cool blue-gray
+     Use these directly for one-off colours, e.g. `to-arctic-200`. */
+  --color-arctic-50: oklch(0.985 0.004 235);
+  --color-arctic-100: oklch(0.962 0.008 235);
+  --color-arctic-200: oklch(0.925 0.012 235);
+  --color-arctic-300: oklch(0.87 0.016 237);
+  --color-arctic-400: oklch(0.74 0.02 240);
+  --color-arctic-500: oklch(0.6 0.022 242);
+  --color-arctic-600: oklch(0.48 0.02 245);
+  --color-arctic-700: oklch(0.38 0.016 248);
+  --color-arctic-800: oklch(0.27 0.012 250);
+  --color-arctic-900: oklch(0.2 0.01 252);
+  --color-arctic-950: oklch(0.155 0.007 255);
+
+  /* Entrance animation used once, on the hero. It becomes the class
+     `animate-rise`. Stagger it with e.g. `[animation-delay:150ms]`.
+     `both` keeps the element hidden until its delay ends. */
+  --animate-rise: rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* Used by ui/line-shadow-text.tsx (kept from the original project). */
+  --animate-line-shadow: line-shadow 15s linear infinite;
+
+  @keyframes line-shadow {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 100% -100%;
+    }
+  }
+}
+
+/* ---------------------------------------------------------------------
+   3. COLOUR TOKENS
+   Each name below is a CSS variable. :root holds the LIGHT values and
+   `.dark` overrides them. Because `.dark` is on <html>, it has the same
+   specificity target as :root and is declared later, so it wins.
+   Names follow shadcn/ui, so everything inside components/ui keeps working.
+   --------------------------------------------------------------------- */
+:root {
+  --radius: 0.75rem;
+
+  /* Page and text */
+  --background: oklch(0.975 0.004 235); /* arctic white */
+  --foreground: oklch(0.2 0.01 252); /* graphite black */
+  --muted-foreground: oklch(0.5 0.016 250); /* secondary text */
+
+  /* Cards, popovers, inputs */
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.2 0.01 252);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.2 0.01 252);
+  --muted: oklch(0.955 0.007 235);
+  --accent: oklch(0.94 0.009 235);
+  --accent-foreground: oklch(0.2 0.01 252);
+  --border: oklch(0.9 0.009 235);
+  --input: oklch(0.9 0.009 235);
+  --ring: oklch(0.62 0.02 245); /* focus ring colour */
+
+  /* Buttons */
+  --primary: oklch(0.2 0.01 252);
+  --primary-foreground: oklch(0.985 0.004 235);
+  --secondary: oklch(0.955 0.007 235);
+  --secondary-foreground: oklch(0.2 0.01 252);
+  --destructive: oklch(0.577 0.245 27.325);
+
+  /* Custom tokens for this portfolio's gradient + faded containers */
+  --surface-from: oklch(1 0 0); /* top-left of a card gradient (white) */
+  --surface-to: oklch(0.955 0.008 235); /* bottom-right (arctic gray) */
+  --surface-highlight: oklch(1 0 0 / 85%); /* 1px inner top shine */
+  --surface-hairline: oklch(0.2 0.01 252 / 16%); /* faded line along a card's top edge */
+  --surface-shadow: oklch(0.3 0.03 250 / 26%); /* soft drop shadow */
+  --glow: oklch(0.88 0.035 235 / 75%); /* arctic haze behind the hero */
+  --grid-line: oklch(0.2 0.01 252 / 6%); /* background grid lines */
+
+  /* Chart/sidebar tokens kept so shadcn components do not break */
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.985 0.004 235);
+  --sidebar-foreground: oklch(0.2 0.01 252);
+  --sidebar-primary: oklch(0.2 0.01 252);
+  --sidebar-primary-foreground: oklch(0.985 0.004 235);
+  --sidebar-accent: oklch(0.94 0.009 235);
+  --sidebar-accent-foreground: oklch(0.2 0.01 252);
+  --sidebar-border: oklch(0.9 0.009 235);
+  --sidebar-ring: oklch(0.62 0.02 245);
+}
+
+.dark {
+  --background: oklch(0.155 0.007 252); /* deep graphite */
+  --foreground: oklch(0.96 0.004 235);
+  --muted-foreground: oklch(0.72 0.012 245);
+
+  --card: oklch(0.2 0.008 252);
+  --card-foreground: oklch(0.96 0.004 235);
+  --popover: oklch(0.2 0.008 252);
+  --popover-foreground: oklch(0.96 0.004 235);
+  --muted: oklch(0.25 0.008 252);
+  --accent: oklch(0.27 0.009 252);
+  --accent-foreground: oklch(0.96 0.004 235);
+  --border: oklch(1 0 0 / 10%); /* white at 10% opacity reads as a soft line on dark */
+  --input: oklch(1 0 0 / 14%);
+  --ring: oklch(0.6 0.02 245);
+
+  --primary: oklch(0.94 0.006 235);
+  --primary-foreground: oklch(0.2 0.01 252);
+  --secondary: oklch(0.27 0.009 252);
+  --secondary-foreground: oklch(0.96 0.004 235);
+  --destructive: oklch(0.704 0.191 22.216);
+
+  --surface-from: oklch(0.265 0.009 252);
+  --surface-to: oklch(0.185 0.007 252);
+  --surface-highlight: oklch(1 0 0 / 7%);
+  --surface-hairline: oklch(1 0 0 / 24%);
+  --surface-shadow: oklch(0 0 0 / 60%);
+  --glow: oklch(0.5 0.06 235 / 30%);
+  --grid-line: oklch(1 0 0 / 6%);
+
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.2 0.008 252);
+  --sidebar-foreground: oklch(0.96 0.004 235);
+  --sidebar-primary: oklch(0.94 0.006 235);
+  --sidebar-primary-foreground: oklch(0.2 0.01 252);
+  --sidebar-accent: oklch(0.27 0.009 252);
+  --sidebar-accent-foreground: oklch(0.96 0.004 235);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.6 0.02 245);
+}
+
+/* ---------------------------------------------------------------------
+   4. @theme inline: variable -> Tailwind utility
+   `--color-card: var(--card)` is what makes `bg-card`, `text-card`,
+   `border-card`, `from-card` ... exist. `inline` means Tailwind writes
+   var(--card) into the utility instead of copying the value, so the
+   utility keeps following the light/dark variables above at runtime.
+   --------------------------------------------------------------------- */
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Custom tokens -> utilities such as `from-surface-from` and `to-surface-to`
+     (used for the gradient on every card). */
+  --color-surface-from: var(--surface-from);
+  --color-surface-to: var(--surface-to);
+  --color-glow: var(--glow);
+}
+
+/* ---------------------------------------------------------------------
+   5. BASE LAYER: defaults for plain HTML elements
+   Anything in @layer base has the lowest priority, so utility classes
+   in your JSX can always override it.
+   --------------------------------------------------------------------- */
+@layer base {
+  * {
+    /* Every border uses the theme border colour unless a class says otherwise,
+       and focus outlines use the ring colour at 50% opacity. */
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    /* Tells the browser to draw its own UI (scrollbars, form controls)
+       in light or dark, matching our theme. */
+    color-scheme: light;
+  }
+  html.dark {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    /* Colours fade smoothly when the theme is toggled. */
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Headings use the display font by default. */
+  h1,
+  h2,
+  h3 {
+    @apply font-display tracking-tight;
+  }
+
+  /* Text-selection colour follows the theme instead of the browser's blue. */
+  ::selection {
+    background: color-mix(in oklab, var(--foreground) 22%, transparent);
+  }
+
+  /* Visible keyboard focus on every interactive element (accessibility).
+     `focus-visible` only triggers for keyboard users, not mouse clicks. */
+  :where(a, button, input, textarea, select, summary):focus-visible {
+    @apply outline-2 outline-offset-2 outline-ring;
+  }
+
+  /* Respect the OS "reduce motion" setting: effectively switch off
+     animations and transitions for visitors who asked for that. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ---------------------------------------------------------------------
+   6. COMPONENT CLASSES (reusable building blocks)
+   `@apply` pastes Tailwind utilities into a normal CSS class so the
+   same look can be reused with one word in JSX.
+   --------------------------------------------------------------------- */
+@layer components {
+  /* ---- .surface : the gradient, faded container used for every card ----
+     HOW IT WORKS
+       bg-linear-to-br   -> background-image: linear-gradient(to bottom right, ...)
+       from-surface-from -> gradient start colour (white in light, graphite in dark)
+       via-.../90        -> middle stop at 90% opacity: softens the transition
+       to-surface-to     -> gradient end colour (arctic gray / darker graphite)
+     The inset box-shadow draws a 1px bright line along the top edge (a "shine"),
+     and the second shadow is a large, blurred, low-opacity drop shadow.
+     The ::before pseudo-element is a hairline that is transparent at both ends and
+     visible in the middle, which is what makes the top edge look "faded". */
+  .surface {
+    @apply relative overflow-hidden rounded-2xl border border-border/70
+      bg-linear-to-br from-surface-from via-surface-from/90 to-surface-to;
+    box-shadow:
+      inset 0 1px 0 0 var(--surface-highlight),
+      0 18px 40px -26px var(--surface-shadow);
+  }
+  .surface::before {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    top: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--surface-hairline), transparent);
+    pointer-events: none; /* never blocks clicks on the card */
+  }
+
+  /* ---- .surface-hover : add to a .surface that should react to hover ----
+     transition-[...] limits animation to the properties that change, which is
+     cheaper than `transition-all`. hover:-translate-y-0.5 lifts the card 2px. */
+  .surface-hover {
+    @apply transition-[transform,box-shadow,border-color] duration-300 ease-out
+      hover:-translate-y-0.5 hover:border-ring/50 motion-reduce:transition-none motion-reduce:hover:translate-y-0;
+  }
+  .surface-hover:hover {
+    box-shadow:
+      inset 0 1px 0 0 var(--surface-highlight),
+      0 26px 50px -24px var(--surface-shadow);
+  }
+
+  /* ---- .glass : frosted navbar ----
+     bg-background/70   -> page colour at 70% opacity, so content shows through
+     backdrop-blur-xl   -> blurs whatever is BEHIND the element (backdrop-filter)
+     backdrop-saturate  -> keeps blurred colours from looking washed out */
+  .glass {
+    @apply bg-background/70 backdrop-blur-xl backdrop-saturate-150 border-b border-border/60;
+  }
+
+  /* ---- .bg-grid : faint engineering-paper grid ----
+     Two 1px linear-gradients (one per axis) are repeated every 44px.
+     The mask fades the grid out toward the bottom so it never fights the text:
+     a mask keeps pixels where it is opaque (#000) and hides them where it is
+     transparent. */
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+    background-size: 44px 44px;
+    -webkit-mask-image: radial-gradient(ellipse 75% 65% at 30% 0%, #000 35%, transparent 100%);
+    mask-image: radial-gradient(ellipse 75% 65% at 30% 0%, #000 35%, transparent 100%);
+  }
+
+  /* ---- .fade-edges-x : left/right fade for the skills marquee ----
+     The mask is transparent at both ends and fully opaque from 12% to 88%,
+     so logos appear to dissolve instead of being cut off. */
+  .fade-edges-x {
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  }
+
+  /* ---- .text-fade : headline that fades from solid to soft ----
+     1. paint a gradient as the element's background
+     2. bg-clip-text  -> cut that background to the shape of the letters
+     3. text-transparent -> hide the normal text colour so the gradient shows */
+  .text-fade {
+    @apply bg-linear-to-b from-foreground via-foreground/90 to-foreground/45 bg-clip-text text-transparent;
+  }
+
+  /* ---- Buttons ----
+     Tailwind v4 cannot @apply another custom class, so the shared base styles
+     are attached to all button classes with one selector list. */
+  .btn,
+  .btn-solid,
+  .btn-soft {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-medium
+      transition duration-300 ease-out select-none
+      hover:-translate-y-0.5 active:translate-y-0 motion-reduce:transition-none motion-reduce:hover:translate-y-0
+      disabled:pointer-events-none disabled:opacity-60;
+  }
+  /* Solid: the foreground colour becomes the button, background colour the text
+     (black button in light mode, white button in dark mode). A vertical gradient
+     from full to 82% opacity gives a subtle, faded depth. */
+  .btn-solid {
+    @apply bg-linear-to-b from-foreground to-foreground/82 text-background
+      shadow-[0_10px_25px_-12px_var(--surface-shadow)] hover:shadow-[0_16px_30px_-12px_var(--surface-shadow)];
+  }
+  /* Soft: reuses the card gradient with a border, for secondary actions. */
+  .btn-soft {
+    @apply border border-border bg-linear-to-br from-surface-from to-surface-to text-foreground
+      hover:border-ring/60;
+  }
+
+  /* ---- .field : text inputs and textarea in the contact form ---- */
+  .field {
+    @apply w-full rounded-xl border border-input bg-background/60 px-4 py-3 text-sm text-foreground
+      placeholder:text-muted-foreground/70 transition-colors duration-200
+      focus-visible:border-ring focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40;
+  }
+}
