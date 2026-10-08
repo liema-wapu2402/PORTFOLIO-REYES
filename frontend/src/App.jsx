@@ -1,11 +1,12 @@
-import useSmoothScroll from '@/hooks/useSmoothScroll';
-import { Navbar, Footer } from '@/components/layout';
-import { Hero } from '@/components/hero';
-import { About } from '@/components/about';
-import { Skills } from '@/components/skills';
-import { Projects } from '@/components/projects';
-import { Education } from '@/components/education';
-import { ContactSection, SocialDock } from '@/components/contact';
+import useSmoothScroll from "@/hooks/useSmoothScroll";
+import { Navbar, Footer } from "@/components/layout";
+import { Hero } from "@/components/hero";
+import { About } from "@/components/about";
+import { Skills } from "@/components/skills";
+import { Projects } from "@/components/projects";
+import { Experience } from "@/components/experience";
+import { Education } from "@/components/education";
+import { ContactSection, SocialDock } from "@/components/contact";
 
 /**
  * App: page order and global behaviour.
@@ -26,6 +27,7 @@ export default function App() {
         <Skills />
         <Projects />
         <Education />
+        <Experience />
         <ContactSection />
       </main>
       <Footer />
