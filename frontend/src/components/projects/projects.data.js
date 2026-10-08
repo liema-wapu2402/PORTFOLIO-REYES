@@ -23,10 +23,9 @@ export const PROJECTS = [
     title: "AG Entertainment",
     description:
       "A full-stack web platform built with Laravel and Blade, featuring a responsive Bootstrap and Tailwind CSS interface, a MySQL backend, and interactive React components.",
-    videoUrl:
-      "https://res.cloudinary.com/dktapziq9/video/upload/v1764394626/1764393871242766_dqfnqn.mp4",
+    videoUrl: "",
     imageUrl: project1Img,
-    liveUrl: "https://sahityaasangamm.in",
+    liveUrl: "",
     repoUrl: "",
     tags: [
       "Blade",
@@ -44,20 +43,17 @@ export const PROJECTS = [
     title: "Portfolio Website",
     description:
       "My personal portfolio built with React and Tailwind CSS, featuring GSAP and Framer Motion animations with Lenis smooth scrolling.",
-    videoUrl:
-      "https://res.cloudinary.com/dktapziq9/video/upload/v1764395075/1764395026924189_ij9257.mp4",
+    videoUrl: "",
     imageUrl: project2Img,
-    liveUrl: SITE.portfolioLiveUrl,
-    repoUrl: SITE.portfolioRepoUrl,
+    liveUrl: "",
+    repoUrl: "",
     tags: ["React", "Tailwind CSS", "GSAP", "Framer Motion", "Lenis"],
   },
   {
     title: "Unattended Human Occupant Detection Application",
-    description:
-      "An Android application built with Java and C++ that detects unattended human occupants and raises alerts to help prevent accidents.",
-    videoUrl:
-      "https://res.cloudinary.com/dktapziq9/video/upload/v1764395357/1764395325884939_lrg7f4.mp4",
-    imageUrl: project3Img,
+    description: "",
+    videoUrl: "",
+    imageUrl: "",
     liveUrl: "https://ons-trading.onrender.com",
     repoUrl: "",
     tags: ["Java", "C++", "Android Studio"],
@@ -66,10 +62,9 @@ export const PROJECTS = [
     title: "Paw Sanctuary",
     description:
       "An animal adoption website built with HTML, CSS, JavaScript, PHP, and Bootstrap that lets visitors browse pets and find a companion to adopt.",
-    videoUrl:
-      "https://res.cloudinary.com/dktapziq9/video/upload/v1764396382/1764396334647746_qruqaf.mp4",
+    videoUrl: "",
     imageUrl: project4Img,
-    liveUrl: "https://creatorhub.in",
+    liveUrl: "",
     repoUrl: "",
     tags: ["Html", "CSS", "JavaScript", "PHP", "Bootstrap"],
   },
@@ -78,7 +73,7 @@ export const PROJECTS = [
     description:
       "An educational desktop game for children that builds basic knowledge through fun, interactive games, built with Java in the Eclipse IDE.",
     imageUrl: project5Img,
-    liveUrl: "https://teacountry.in",
+    liveUrl: "",
     repoUrl: "",
     tags: ["Java", "Eclipse"],
   },
@@ -86,10 +81,9 @@ export const PROJECTS = [
     title: "Reports Integration",
     description:
       "A reporting system that pulls data from multiple sources and report engines into one unified, exportable output, built with Laravel and React.",
-    videoUrl:
-      "https://res.cloudinary.com/dktapziq9/video/upload/v1764397211/1764397136159111_zlcckk.mp4",
+    videoUrl: "",
     imageUrl: project6Img,
-    liveUrl: "https://scabbardtech.com",
+    liveUrl: "",
     repoUrl: "",
     tags: [
       "Blade",
