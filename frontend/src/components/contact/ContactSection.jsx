@@ -1,48 +1,70 @@
-import { ArrowUpRight } from 'lucide-react';
-import { Section, SectionHeading } from '@/components/layout';
-import ContactForm from './ContactForm';
-import { getSocialLinks } from './socialLinks';
+import { ArrowUpRight } from "lucide-react";
+import { Section, SectionHeading } from "@/components/layout";
+import ContactForm from "./ContactForm";
+import { getSocialLinks, isExternalLink } from "./socialLinks";
 
 /**
  * ContactSection
  * --------------
- * Two columns from `lg` (1024px) up, stacked on smaller screens:
- *   left  (2/5): short intro + direct links
- *   right (3/5): the form inside a gradient .surface card
- * `lg:grid-cols-5` makes five equal tracks; `lg:col-span-2` / `lg:col-span-3`
- * choose how many tracks each side takes.
+ * For visitors who want to message me (recruiters, clients, collaborators,
+ * or anyone with a question).
+ *
+ * Layout: stacked on mobile, two columns from `lg` (1024px) up.
+ *   left  (2/5): intro + direct contact links (each shows its real value)
+ *   right (3/5): the message form inside a .surface card
  */
 export default function ContactSection() {
   const links = getSocialLinks();
 
   return (
     <Section id="contact">
-      <div className="grid gap-12 lg:grid-cols-5 lg:gap-10">
+      <div className="grid gap-10 lg:grid-cols-5 lg:gap-12">
         <div className="lg:col-span-2">
           <SectionHeading
-            title="Let's work together"
-            description="Have a project, an opportunity, or just a question? Send a message and I will get back to you."
+            title="Get in touch"
+            description="Want to work together, offer an opportunity, or ask me something? Send me a message using the form and it goes straight to my inbox."
           />
 
+          <p className="mb-4 text-sm font-medium text-muted-foreground">
+            Prefer to reach me directly?
+          </p>
+
           <ul className="space-y-3">
-            {links.map(({ name, url, Icon }) => (
+            {links.map(({ name, label, url, Icon }) => (
               <li key={name}>
                 <a
                   href={url}
-                  target={url.startsWith('mailto:') ? undefined : '_blank'}
+                  target={isExternalLink(url) ? "_blank" : undefined}
                   rel="noopener noreferrer"
-                  className="group surface surface-hover flex items-center gap-4 px-5 py-4"
+                  className="group surface surface-hover flex items-center gap-4 px-4 py-3.5 sm:px-5 sm:py-4"
                 >
                   <Icon className="size-5 shrink-0 text-muted-foreground transition-colors group-hover:text-foreground" />
-                  <span className="font-medium">{name}</span>
-                  <ArrowUpRight className="ml-auto size-4 text-muted-foreground transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-foreground" />
+                  <span className="min-w-0 flex-1">
+                    <span className="block font-medium leading-tight">
+                      {name}
+                    </span>
+                    <span className="block truncate text-sm text-muted-foreground">
+                      {label}
+                    </span>
+                  </span>
+                  <ArrowUpRight className="size-4 shrink-0 text-muted-foreground transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-foreground" />
                 </a>
               </li>
             ))}
           </ul>
         </div>
 
-        <div className="surface p-6 sm:p-8 lg:col-span-3">
+        <div className="surface p-5 sm:p-8 lg:col-span-3">
+          <div className="mb-6">
+            <h3 className="text-xl font-semibold tracking-tight sm:text-2xl">
+              Send me a message
+            </h3>
+            <p className="mt-1.5 text-sm text-muted-foreground">
+              This form is for anyone who wants to message me. Leave your name
+              and email so I can reply.
+            </p>
+          </div>
+
           <ContactForm />
         </div>
       </div>

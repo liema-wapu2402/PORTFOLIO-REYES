@@ -1,0 +1,186 @@
+%-------------------------
+% Resume in LaTeX - Amiel Andrei C. Reyes
+% Based on the widely used "Jake's Resume" layout (MIT licensed)
+% Compile with: pdflatex Reyes_Resume.tex   (or paste into Overleaf)
+%-------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\input{glyphtounicode}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Margins
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Section headings
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+% Make the PDF text selectable / ATS friendly
+\pdfgentounicode=1
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{#1 \vspace{-2pt}}
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubSubheading}[2]{
+  \item
+  \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+    \textit{\small#1} & \textit{\small #2} \\
+  \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%----------HEADING----------
+\begin{center}
+    \textbf{\Huge \scshape Amiel Andrei C. Reyes} \\ \vspace{1pt}
+    \small Quezon City, NCR \\ \vspace{1pt}
+    \small 09916178708 $|$
+    \href{mailto:amielandreireyes@gmail.com}{\underline{amielandreireyes@gmail.com}} $|$
+    \href{https://www.linkedin.com/in/aacreyes}{\underline{linkedin.com/in/aacreyes}} $|$
+    \href{https://lnk.ink/Reyes_Portfolio}{\underline{lnk.ink/Reyes\_Portfolio}}
+\end{center}
+
+%-----------SUMMARY-----------
+\section{Summary}
+\small{Motivated Computer Engineering graduate and current Data Analyst with hands-on experience in full-stack web development, database management, and reporting. Technically skilled in Laravel, PHP, and relational databases, with a foundation in embedded systems and networking. Eager to apply technical and analytical skills to real-world, data-driven solutions while continuously learning.}
+
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Southern Luzon State University - Main Campus}{Completed July 2025}
+      {Bachelor of Science in Computer Engineering}{}
+    \resumeSubheading
+      {TESDA (Technical Education and Skills Development Authority)}{2024}
+      {Developing Designs for User Interface; SMART Android Mobile Apps Development for Beginners; Maintaining Computer Systems and Networks}{}
+    \resumeSubheading
+      {Cisco Networking Academy}{2024}
+      {Data Analytics Essentials; Computer Hardware Basics; Networking Devices and Initial Configuration}{}
+  \resumeSubHeadingListEnd
+
+%-----------EXPERIENCE-----------
+\section{Experience}
+  \resumeSubHeadingListStart
+
+    \resumeSubheading
+      {One Document Corporation}{September 17, 2025 -- Present}
+      {Data Analyst / Report Writer}{}
+      \resumeItemListStart
+        \resumeItem{Manage and optimize databases to ensure accuracy and efficiency}
+        \resumeItem{Integrate data systems and generate reports using full-stack development tools}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {One Document Corporation}{July 2024 -- August 2024}
+      {Web Developer (Intern)}{}
+      \resumeItemListStart
+        \resumeItem{Developed and maintained dynamic websites, handling both front-end and back-end development for various companies and institutions}
+        \resumeItem{Managed large-scale data using large database systems}
+        \resumeItem{Trained in modern web technologies, including Laravel, to improve efficiency and scalability}
+      \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+
+%-----------LEADERSHIP & ACTIVITIES-----------
+\section{Leadership \& Activities}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Rotaract Club of Tiaong Transforming New Gen}{2021 -- Present}
+      {Foundations Director (2025 -- Present)}{}
+      \resumeItemListStart
+        \resumeItem{Club Service Director, 2024 -- 2025}
+        \resumeItem{Project Chairperson, EduAksyon Year 3, 2023 -- 2024}
+        \resumeItem{Secretariat Director, 2023 -- 2024}
+        \resumeItem{Member, 2021 -- 2023}
+      \resumeItemListEnd
+    \resumeSubheading
+      {Institute of Computer Engineers of the Philippines (ICpEP)}{2022 -- 2023, 2024 -- 2025}
+      {Registered Member}{}
+  \resumeSubHeadingListEnd
+
+%-----------SKILLS-----------
+\section{Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Programming \& Markup}{: Java, C++, Python, PHP, JavaScript, HTML, CSS} \\
+     \textbf{Web \& Frameworks}{: Laravel, Node.js, React.js, Bootstrap, Tailwind CSS} \\
+     \textbf{Databases}{: MySQL, PostgreSQL, SQLite, Database Management} \\
+     \textbf{Tools \& Platforms}{: ClickUp, Google Colab, Android Studio} \\
+     \textbf{Other}{: Full-Stack Development, Embedded Systems}
+    }}
+ \end{itemize}
+
+%-----------SEMINARS & WORKSHOPS-----------
+\section{Seminars \& Workshops (2025)}
+  \resumeItemListStart
+    \resumeItem{Initiate: Introduction to Web and System Administration}
+    \resumeItem{Boot, Break, Fix, Repeat: The Art of Mastering Computer Systems}
+    \resumeItem{The Digital Workforce: Thriving in the Industry as a Computer Engineer (DICT)}
+    \resumeItem{From Concept to Creation: A Hands-On Workshop on 3D Designing, Modeling, and Printing for Hardware Development (EvTech Company)}
+    \resumeItem{Behind the Screen: A Threat Analyst's Path to Malware Defense (Trend Micro)}
+  \resumeItemListEnd
+
+%-----------CHARACTER REFERENCES-----------
+\section{Character References}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Engr. Jerwin Obmerga} -- CpE Instructor, Southern Luzon State University \\
+     jobmerga@slsu.edu.ph $|$ 09054298428 \\[4pt]
+     \textbf{Engr. Kier L. Aguilar} -- Junior Web Developer, One Document Corporation \\
+     klaguilar@onedoc.ph $|$ 09606023995 \\[4pt]
+     \textbf{Jan Nicole D. Perez} -- Actuarial Analyst, Maxicare Corporation \\
+     jan.perez@maxicare.com.ph $|$ 09278653244
+    }}
+ \end{itemize}
+
+\end{document}

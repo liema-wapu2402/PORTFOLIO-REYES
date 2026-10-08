@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { Loader2, Send } from 'lucide-react';
-import { SITE } from '@/data/site';
+import { useState } from "react";
+import { AlertCircle, CheckCircle2, Loader2, Send } from "lucide-react";
+import { SITE } from "@/data/site";
 
 /**
  * ContactForm
@@ -10,47 +10,68 @@ import { SITE } from '@/data/site';
  *
  * status: 'idle' | 'sending' | 'success' | 'error'
  *
- * Styling note: every input uses the `.field` class from index.css
- * (rounded border, theme-aware background, visible focus ring).
- * The hidden `_gotcha` input is a honeypot: bots fill it, people never see it,
- * and Formspree discards submissions where it has a value.
+ * - Every input uses the `.field` class from index.css.
+ * - `_gotcha` is a honeypot: bots fill it, people never see it, and Formspree
+ *   discards submissions where it has a value.
+ * - `_subject` sets the subject line of the email Formspree sends to you.
+ * - Editing the form after a success/error message clears that message.
  */
 export default function ContactForm() {
-  const [status, setStatus] = useState('idle');
+  const [status, setStatus] = useState("idle");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const form = event.currentTarget;
-    setStatus('sending');
+    setStatus("sending");
 
     try {
       const response = await fetch(SITE.formspreeEndpoint, {
-        method: 'POST',
-        headers: { Accept: 'application/json' },
+        method: "POST",
+        headers: { Accept: "application/json" },
         body: new FormData(form),
       });
-      if (!response.ok) throw new Error('Request failed');
+      if (!response.ok) throw new Error("Request failed");
       form.reset();
-      setStatus('success');
+      setStatus("success");
     } catch {
-      setStatus('error');
+      setStatus("error");
     }
   };
 
+  const clearStatus = () => {
+    if (status === "success" || status === "error") setStatus("idle");
+  };
+
   return (
-    <form onSubmit={handleSubmit} className="space-y-5" noValidate={false}>
+    <form onSubmit={handleSubmit} onChange={clearStatus} className="space-y-5">
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
           <label htmlFor="name" className="mb-1.5 block text-sm font-medium">
-            Name
+            Your name
           </label>
-          <input id="name" name="name" type="text" required autoComplete="name" placeholder="Your name" className="field" />
+          <input
+            id="name"
+            name="name"
+            type="text"
+            required
+            autoComplete="name"
+            placeholder="Juan Dela Cruz"
+            className="field"
+          />
         </div>
         <div>
           <label htmlFor="email" className="mb-1.5 block text-sm font-medium">
-            Email
+            Your email
           </label>
-          <input id="email" name="email" type="email" required autoComplete="email" placeholder="you@example.com" className="field" />
+          <input
+            id="email"
+            name="email"
+            type="email"
+            required
+            autoComplete="email"
+            placeholder="you@example.com"
+            className="field"
+          />
         </div>
       </div>
 
@@ -61,19 +82,35 @@ export default function ContactForm() {
         <textarea
           id="message"
           name="message"
-          rows={5}
+          rows={6}
           required
-          placeholder="Tell me about your project or idea"
-          className="field resize-y"
+          placeholder="Tell me about your project, opportunity, or question"
+          className="field min-h-36 resize-y"
         />
       </div>
 
-      {/* Honeypot (see note above) */}
-      <input type="text" name="_gotcha" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
+      {/* Hidden fields (see note above) */}
+      <input
+        type="hidden"
+        name="_subject"
+        value="New message from my portfolio"
+      />
+      <input
+        type="text"
+        name="_gotcha"
+        tabIndex={-1}
+        autoComplete="off"
+        className="hidden"
+        aria-hidden="true"
+      />
 
-      <div className="flex flex-wrap items-center gap-4">
-        <button type="submit" disabled={status === 'sending'} className="btn-solid">
-          {status === 'sending' ? (
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+        <button
+          type="submit"
+          disabled={status === "sending"}
+          className="btn-solid w-full justify-center sm:w-auto"
+        >
+          {status === "sending" ? (
             <>
               <Loader2 className="size-4 animate-spin" />
               Sending
@@ -86,15 +123,30 @@ export default function ContactForm() {
           )}
         </button>
 
-        {/* aria-live announces the result to screen readers when it appears */}
-        <p aria-live="polite" className="text-sm">
-          {status === 'success' && <span className="text-foreground">Message sent. I will reply as soon as I can.</span>}
-          {status === 'error' && (
-            <span className="text-destructive">
-              The message could not be sent. Please try again or email {SITE.email}.
-            </span>
+        {/* role="status" + aria-live announce the result to screen readers */}
+        <div role="status" aria-live="polite" className="text-sm sm:flex-1">
+          {status === "success" && (
+            <p className="flex items-start gap-2 text-foreground">
+              <CheckCircle2 className="mt-0.5 size-4 shrink-0" />
+              Message sent. I will reply as soon as I can.
+            </p>
           )}
-        </p>
+          {status === "error" && (
+            <p className="flex items-start gap-2 text-destructive">
+              <AlertCircle className="mt-0.5 size-4 shrink-0" />
+              <span>
+                The message could not be sent. Please try again or email{" "}
+                <a
+                  href={`mailto:${SITE.email}`}
+                  className="underline underline-offset-2"
+                >
+                  {SITE.email}
+                </a>
+                .
+              </span>
+            </p>
+          )}
+        </div>
       </div>
     </form>
   );
