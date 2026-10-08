@@ -9,7 +9,7 @@ import { SITE } from "@/data/site";
 import { scrollToSection } from "@/lib/scrollToSection";
 import { Section, SectionHeading } from "@/components/layout";
 import ScrollReveal from "@/components/effects/ScrollReveal";
-import profileImage from "@/assets/aacr_profile.jpg";
+import profileImage from "@/assets/aacr_grad.jpg";
 
 /**
  * Three short "what I care about" cards under the paragraph. They summarise the
