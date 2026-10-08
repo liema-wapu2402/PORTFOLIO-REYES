@@ -53,7 +53,7 @@ export const PROJECTS = [
     title: "Unattended Human Occupant Detection Application",
     description: "",
     videoUrl: "",
-    imageUrl: "",
+    imageUrl: project3Img,
     liveUrl: "https://ons-trading.onrender.com",
     repoUrl: "",
     tags: ["Java", "C++", "Android Studio"],
