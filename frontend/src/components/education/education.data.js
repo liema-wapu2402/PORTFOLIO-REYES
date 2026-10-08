@@ -31,12 +31,16 @@ export const EDUCATION = [
 
   {
     id: 2,
-    school: "TESDA Online Program",
+    school: "Technical Education and Skills Development Authority (TESDA)",
     program: "Upskilling",
-    period: "2025",
-    course: "Technical-Vocational Education and Training (TVET)",
+    period: "2024",
+    course: "Certificates of Completion",
     note: "",
-    highlights: ["Object-Oriented Programming"],
+    highlights: [
+      "Developing Designs for User Interface",
+      "SMART Android Mobile Apps Development for Beginners",
+      "Maintaining Computer Systems and Networks",
+    ],
     current: false,
   },
 
@@ -44,21 +48,29 @@ export const EDUCATION = [
     id: 3,
     school: "Cisco Networking Academy",
     program: "Upskilling",
-    period: "2025",
-    course: "Cisco Certified Network Associate (CCNA)",
+    period: "2024",
+    course: "Certificates of Course Completion",
     note: "",
-    highlights: ["Object-Oriented Programming"],
+    highlights: [
+      "Data Analytics Essentials",
+      "Computer Hardware Basics",
+      "Networking Devices and Initial Configuration",
+    ],
     current: false,
   },
 
   {
     id: 4,
-    school: "Southern Luzon State University",
+    school: "Southern Luzon State University - Main Campus",
     program: "College",
     period: "2021-2025",
     course: "Bachelor of Science in Computer Engineering",
-    note: "",
-    highlights: ["Object-Oriented Programming"],
+    note: "Completed July 31, 2025.",
+    highlights: [
+      "Embedded Systems",
+      "Database Management",
+      "Fullstack Development",
+    ],
     current: false,
   },
 ];
@@ -68,4 +80,32 @@ export const EDUCATION = [
  * "Certifications" block is hidden. Example entry:
  *   { title: 'Course name', issuer: 'Organisation', year: '2025' }
  */
-export const CERTIFICATIONS = [];
+export const CERTIFICATIONS = [
+  {
+    title: "Initiate: Introduction to Web and System Administration",
+    issuer: "Certificate of Participation",
+    year: "2025",
+  },
+  {
+    title: "Boot, Break, Fix, Repeat: The Art of Mastering Computer Systems",
+    issuer: "Certificate of Participation",
+    year: "2025",
+  },
+  {
+    title:
+      "The Digital Workforce: Thriving in the Industry as a Computer Engineer",
+    issuer: "DICT",
+    year: "2025",
+  },
+  {
+    title:
+      "From Concept to Creation: 3D Designing, Modeling, and Printing for Hardware Development",
+    issuer: "EvTech Company",
+    year: "2025",
+  },
+  {
+    title: "Behind the Screen: A Threat Analyst's Path to Malware Defense",
+    issuer: "Trend Micro",
+    year: "2025",
+  },
+];

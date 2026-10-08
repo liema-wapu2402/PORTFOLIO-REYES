@@ -1,10 +1,5 @@
 import { motion, useReducedMotion } from "motion/react";
-import {
-  ArrowUpRight,
-  LayoutGrid,
-  MousePointerClick,
-  Sparkles,
-} from "lucide-react";
+import { ArrowUpRight, Code2, Database, Users } from "lucide-react";
 import { SITE } from "@/data/site";
 import { scrollToSection } from "@/lib/scrollToSection";
 import { Section, SectionHeading } from "@/components/layout";
@@ -17,19 +12,19 @@ import profileImage from "@/assets/aacr_grad.jpg";
  */
 const FOCUS = [
   {
-    icon: Sparkles,
-    title: "Motion & interaction",
-    text: "Smooth transitions and small details that make an interface feel alive.",
+    icon: Code2,
+    title: "Full-stack development",
+    text: "Building dynamic web apps with Laravel, React, and MySQL, from the Blade views to the backend.",
   },
   {
-    icon: LayoutGrid,
-    title: "Layout & timing",
-    text: "Experimenting with layouts, animation and timing until things feel natural.",
+    icon: Database,
+    title: "Data & reporting",
+    text: "Managing and optimizing databases, and generating accurate reports that teams can rely on.",
   },
   {
-    icon: MousePointerClick,
-    title: "Flow & usability",
-    text: "From early visual ideas to refined, cohesive interfaces that are easy to use.",
+    icon: Users,
+    title: "Leadership & community",
+    text: "Years of service and leadership in Rotaract and ICpEP, alongside a habit of continuous learning.",
   },
 ];
 
@@ -44,7 +39,7 @@ const FOCUS = [
  *   - `lg:grid-cols-[...]` only kicks in from 1024px; below that everything stacks.
  *   - The profile card is a row on tablets (`sm:flex-row`) and a column on desktop
  *     (`lg:flex-col`), so it never looks stretched on wide-but-short screens.
- *   - The photo lives at src/assets/aacr_profile.jpg. Replace that file to change it.
+ *   - The photo is imported from src/assets/aacr_grad.jpg. Replace that file to change it.
  *   - The focus cards are 1 column on phones, 3 columns from `sm`.
  *   - The Section does NOT use overflow-hidden, because that would break `sticky`.
  *
@@ -75,7 +70,7 @@ export default function About() {
 
       <SectionHeading
         title="About me"
-        description="A little about how I work and what I enjoy building."
+        description="A Computer Engineering graduate who builds web systems and turns data into reports."
       />
 
       <div className="grid gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-10">

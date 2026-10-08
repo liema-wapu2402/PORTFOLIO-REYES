@@ -1,12 +1,12 @@
 import { useRef } from "react";
 import { motion, useReducedMotion, useScroll, useSpring } from "motion/react";
-import { Award } from "lucide-react";
 import { Section, SectionHeading } from "@/components/layout";
 import TimelineItem from "./TimelineItem";
+import Certifications from "./Certifications";
 import { EDUCATION, CERTIFICATIONS } from "./education.data";
 
 /**
- * Education: an animated, responsive timeline.
+ * Education: an animated, responsive timeline, followed by a certifications grid.
  *
  * BACKGROUND (behind the content, `-z-10`; `isolate` on the section keeps it
  * from slipping behind the page):
@@ -21,7 +21,7 @@ import { EDUCATION, CERTIFICATIONS } from "./education.data";
  *   static track. `origin-top` makes the scale grow from the top edge.
  *
  * RESPONSIVE: see TimelineItem.jsx (single column on phones, alternating
- * left/right from `md` up).
+ * left/right from `md` up) and Certifications.jsx (1 / 2 / 6-column grid).
  */
 const GRID_MASK =
   "radial-gradient(ellipse 70% 60% at 50% 45%, #000 25%, transparent 100%)";
@@ -64,7 +64,7 @@ export default function Education() {
 
       <SectionHeading
         title="Education"
-        description="Where I study and what I have completed."
+        description="Where I studied and what I have completed."
       />
 
       {/* ---------- Timeline ---------- */}
@@ -91,36 +91,7 @@ export default function Education() {
       </ol>
 
       {/* ---------- Certifications (hidden while CERTIFICATIONS is empty) ---------- */}
-      {CERTIFICATIONS.length > 0 && (
-        <div className="mt-16">
-          <h3 className="mb-5 text-xl font-semibold">Certifications</h3>
-          <ul className="grid gap-4 sm:grid-cols-2">
-            {CERTIFICATIONS.map((cert, i) => (
-              <motion.li
-                key={cert.title}
-                initial={reduce ? false : { opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{
-                  duration: 0.5,
-                  delay: i * 0.08,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-                className="surface surface-hover flex items-start gap-3 p-5"
-              >
-                <Award className="mt-0.5 size-5 shrink-0 text-muted-foreground" />
-                <div>
-                  <p className="font-medium">{cert.title}</p>
-                  <p className="text-sm text-muted-foreground">
-                    {cert.issuer}
-                    {cert.year ? ` · ${cert.year}` : ""}
-                  </p>
-                </div>
-              </motion.li>
-            ))}
-          </ul>
-        </div>
-      )}
+      <Certifications items={CERTIFICATIONS} />
     </Section>
   );
 }
