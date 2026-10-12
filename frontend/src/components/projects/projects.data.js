@@ -45,7 +45,7 @@ export const PROJECTS = [
       "My personal portfolio built with React and Tailwind CSS, featuring GSAP and Framer Motion animations with Lenis smooth scrolling.",
     videoUrl: "",
     imageUrl: project2Img,
-    liveUrl: "",
+    liveUrl: "https://ag-entertainment-v2.vercel.app/",
     repoUrl: "",
     tags: ["React", "Tailwind CSS", "GSAP", "Framer Motion", "Lenis"],
   },
