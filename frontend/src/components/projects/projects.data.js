@@ -25,7 +25,7 @@ export const PROJECTS = [
       "A full-stack web platform built with Laravel and Blade, featuring a responsive Bootstrap and Tailwind CSS interface, a MySQL backend, and interactive React components.",
     videoUrl: "",
     imageUrl: project1Img,
-    liveUrl: "",
+    liveUrl: "https://ag-entertainment-v2.vercel.app/",
     repoUrl: "",
     tags: [
       "Blade",
@@ -45,7 +45,8 @@ export const PROJECTS = [
       "My personal portfolio built with React and Tailwind CSS, featuring GSAP and Framer Motion animations with Lenis smooth scrolling.",
     videoUrl: "",
     imageUrl: project2Img,
-    liveUrl: "https://ag-entertainment-v2.vercel.app/",
+    liveUrl:
+      "https://portfolio-reyes-git-main-liema-wapu2402s-projects.vercel.app/",
     repoUrl: "",
     tags: ["React", "Tailwind CSS", "GSAP", "Framer Motion", "Lenis"],
   },
@@ -54,7 +55,7 @@ export const PROJECTS = [
     description: "",
     videoUrl: "",
     imageUrl: project3Img,
-    liveUrl: "https://ons-trading.onrender.com",
+    liveUrl: "",
     repoUrl: "",
     tags: ["Java", "C++", "Android Studio"],
   },
