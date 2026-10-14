@@ -37,6 +37,9 @@ export const PROJECTS = [
       "PHP",
       "JavaScript",
       "React",
+      "Vercel",
+      "Render",
+      "Aiven",
     ],
   },
   {
@@ -48,7 +51,15 @@ export const PROJECTS = [
     liveUrl:
       "https://portfolio-reyes-git-main-liema-wapu2402s-projects.vercel.app/",
     repoUrl: "",
-    tags: ["React", "Tailwind CSS", "GSAP", "Framer Motion", "Lenis"],
+    tags: [
+      "React",
+      "Tailwind CSS",
+      "GSAP",
+      "Framer Motion",
+      "Lenis",
+      "Vercel",
+      "Spline",
+    ],
   },
   {
     title: "Unattended Human Occupant Detection Application",
@@ -78,6 +89,9 @@ export const PROJECTS = [
       "React",
       "PostgreSQL",
       "Spline",
+      "Vercel",
+      "Render",
+      "Neon",
     ],
   },
   {
@@ -101,12 +115,15 @@ export const PROJECTS = [
       "Blade",
       "Laravel",
       "CSS",
+      "PHP",
       "Bootstrap",
       "Tailwind CSS",
       "MySQL",
-      "PHP",
       "JavaScript",
       "React",
+      "Vercel",
+      "Render",
+      "Aiven",
     ],
   },
 ];
